@@ -212,7 +212,7 @@ def build_tools_schema(allow_web):
                 "expression": {"type": "string"}}, "required": ["expression"]},
         }},
     ]
-    if allow_web:
+    if allow_web is True:
         tools.append({"type": "function", "function": {
             "name": "web_search",
             "description": "Search the public web. WARNING: this sends your query to an external search engine outside this machine — only use it when the knowledge base clearly does not cover the question.",
@@ -238,6 +238,9 @@ Available documents in the selected knowledge base(s): {doc_list}"""
 # --------------------------------------------------------------- the loop
 def run_agent(*, model, history, kb_ids, allow_web, owui_base, ollama_base, auth_headers, on_step=None):
     """history: list of {role, content} dicts ending in the latest user turn."""
+    # Only an explicit boolean opt-in grants external search, including for
+    # callers that bypass the HTTP request validator.
+    allow_web = allow_web is True
     kb_cache = []
     doc_names = []
     try:
@@ -269,8 +272,11 @@ def run_agent(*, model, history, kb_ids, allow_web, owui_base, ollama_base, auth
             a, owui_base=owui_base, auth_headers=auth_headers, kb_ids=kb_ids, kb_cache=kb_cache),
         "get_current_datetime": tool_current_datetime,
         "calculate": tool_calculate,
-        "web_search": tool_web_search,
     }
+    # Model output is untrusted: hiding a tool in the schema is not an
+    # authorization boundary. Only permitted handlers enter this run's map.
+    if allow_web:
+        dispatch["web_search"] = tool_web_search
 
     for _ in range(MAX_STEPS):
         try:
@@ -300,13 +306,16 @@ def run_agent(*, model, history, kb_ids, allow_web, owui_base, ollama_base, auth
             fn_args = (call.get("function") or {}).get("arguments") or {}
             handler = dispatch.get(fn)
             if handler is None:
-                result = f"Error: unknown tool '{fn}'."
+                result = ("Error: web_search is disabled for this run." if fn == "web_search"
+                          else f"Error: unknown tool '{fn}'.")
             else:
                 try:
                     result = handler(fn_args)
                 except Exception as e:
                     result = f"Error running {fn}: {e}"
-            step = {"type": "tool", "tool": fn, "args": fn_args, "result": result, "network": fn == "web_search"}
+            step = {"type": "tool", "tool": fn, "args": fn_args, "result": result,
+                    "network": fn == "web_search" and handler is not None,
+                    "blocked": handler is None}
             steps.append(step)
             if on_step:
                 on_step(step)

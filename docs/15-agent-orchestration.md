@@ -69,7 +69,8 @@ backend of truth (docs/00 Section "Do not over-engineer").
    the selected knowledge base(s) (fetched once via `/api/v1/knowledge/`).
 2. Call Ollama with the running message list + tool schema.
 3. If the response has no `tool_calls`, that's the final answer — stop.
-4. Otherwise execute each requested tool, append a `{"role":"tool",
+4. Otherwise check each requested tool against the run's dispatch allowlist,
+   execute only permitted handlers, append a `{"role":"tool",
    "tool_name", "content"}` message per Ollama's documented format, and
    loop.
 5. Hard cap: **6 steps.** If exceeded, the last content is returned with
@@ -102,9 +103,16 @@ user-controlled exception — never automatic.
 - **Off by default**, every session — the checkbox in the Agent screen is
   never remembered as "on".
 - The system prompt tells the model explicitly whether `web_search` exists
-  for this run; when it's off, the tool schema doesn't even include it, so
-  the model cannot call something that isn't there.
-- Every web-search step is tagged `network: true` and rendered with a
+  for this run; when it's off, the tool schema omits it. Model output is
+  still untrusted: the dispatcher also omits the web-search handler unless
+  `allow_web is True`, so a returned disallowed call cannot invoke it.
+- `/agent/run` requires a JSON boolean for `allowWeb` (omitted means
+  `false`); non-boolean values return HTTP 400. Direct Python callers also
+  need exactly `True`, not a truthy string or integer. The permission is
+  specific to each run and cannot carry over from an earlier run.
+- Rejected web-search and unknown-tool calls produce a clear error in the
+  trace and tool response, with `blocked: true` and `network: false`.
+- Every permitted web-search invocation is tagged `network: true` and rendered with a
   visible amber "leaves this machine" badge in the trace — never blended
   in with local tool calls.
 - Best-effort scrape of DuckDuckGo's dependency-free HTML endpoint
@@ -138,3 +146,13 @@ tool-capable model (qwen3 is confirmed to support tool calling), select the
 knowledge base(s) it may search, leave "Allow web search" off unless you
 explicitly need it, and ask a question. Each tool call appears as its own
 card before the final answer.
+
+## Offline permission regression tests
+
+Run `python -m unittest discover -s frontend/tests -v` from the repository
+root with Python 3.11 or 3.12. The standard-library tests use synthetic model
+responses and mock every service/search call; real HTTP requests are blocked
+and asserted absent. They cover disabled/enabled/unknown tool dispatch,
+strict request booleans, per-run isolation and selected knowledge-base scope.
+They do not validate live Ollama/Open WebUI APIs, Windows installation,
+document retrieval quality or backup restoration.
