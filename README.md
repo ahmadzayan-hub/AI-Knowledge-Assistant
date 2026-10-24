@@ -4,6 +4,8 @@
 
 **Ask useful questions of your own documents, on your own Windows computer.** This repository combines a staged Windows setup kit with a React interface for Ollama and Open WebUI.
 
+<p align="center"><img src="docs/assets/hero.jpg" alt="Concept image (AI-generated). Not a product screenshot." width="100%"><br><sub><em>Concept image (AI-generated). Not a product screenshot.</em></sub></p>
+
 ![React](https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=black)
 ![esbuild](https://img.shields.io/badge/esbuild-0.25-FFCF00?logo=esbuild&logoColor=black)
 ![Python](https://img.shields.io/badge/Python-3.11%20%7C%203.12-3776AB?logo=python&logoColor=white)
