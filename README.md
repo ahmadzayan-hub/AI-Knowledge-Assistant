@@ -1,6 +1,15 @@
+<p align="center"><img src="docs/assets/banner.svg" alt="Local AI Knowledge Assistant: ask your own documents, on your own Windows computer" width="100%"></p>
+
 # Local AI Knowledge Assistant
 
 **Ask useful questions of your own documents, on your own Windows computer.** This repository combines a staged Windows setup kit with a React interface for Ollama and Open WebUI.
+
+![React](https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=black)
+![esbuild](https://img.shields.io/badge/esbuild-0.25-FFCF00?logo=esbuild&logoColor=black)
+![Python](https://img.shields.io/badge/Python-3.11%20%7C%203.12-3776AB?logo=python&logoColor=white)
+![Ollama](https://img.shields.io/badge/Ollama-local%20models-000000?logo=ollama&logoColor=white)
+![Open WebUI](https://img.shields.io/badge/Open%20WebUI-RAG-6d5ef2)
+![PowerShell](https://img.shields.io/badge/PowerShell-Windows%2011-5391FE?logo=powershell&logoColor=white)
 
 [Start safely](docs/GETTING_STARTED.md) · [Frontend guide](frontend/README.md) · [Implementation plan](docs/00-implementation-plan.md) · [Retrieval tests](docs/07-retrieval-testing.md)
 
@@ -18,6 +27,20 @@ The intended baseline is a resource-constrained Windows 11 computer. Benchmark t
 - **A tool-using agent implementation:** knowledge search, document reading, arithmetic, date/time and an optional external web-search path, with a visible execution trace.
 - **Arabic and English workflows:** benchmark prompts and retrieval validation guidance, with direction-aware chat rendering.
 - **A separate public preview build:** the same interface backed by canned data. It is not the private local assistant.
+
+## Screenshots
+
+These come from the **public sample-data preview** (`frontend/build/build-demo.mjs`), not from a private installation. The numbers, libraries and status values are canned demo data.
+
+| Desktop (1440 x 900) | Mobile (390 x 844) |
+|---|---|
+| <img src="docs/assets/screenshots/desktop.png" alt="Home view of the sample-data preview on desktop" width="100%"> | <img src="docs/assets/screenshots/mobile.png" alt="Home view on mobile with the bottom tab bar" width="260"> |
+
+Agent view with the web-search opt-in off by default:
+
+<img src="docs/assets/screenshots/desktop-agent.png" alt="Agent view with knowledge-base selection and the web-search opt-in" width="100%">
+
+On screens narrower than 760 px the sidebar is replaced by a bottom tab bar with the same destinations.
 
 ## Architecture
 
@@ -106,25 +129,52 @@ The manifest declares `build`, not root-level `dev` or `test` scripts. There is 
 
 For the separate, clearly labelled sample preview, see [the preview boundary](docs/GETTING_STARTED.md#public-preview-is-not-the-local-product). Never publish real documents, account data or API keys with that output.
 
+## Scripts and checks
+
+| Command (run in `frontend/`) | Purpose |
+|---|---|
+| `npm run build` | Build the real local bundle into `frontend/dist/` |
+| `node build/build-demo.mjs` | Build the sample-data preview into `frontend/demo-dist/` |
+| `python -m unittest discover -s frontend/tests -v` (from the repository root) | Offline agent permission tests |
+
+## Deploy the public preview on Vercel
+
+Only the sample-data preview can be hosted. It has no access to your local libraries, models or API keys. `frontend/vercel.json` pins the settings:
+
+| Setting | Value |
+|---|---|
+| Framework preset | Other |
+| Root directory | `frontend` |
+| Install command | `npm install` |
+| Build command | `node build/build-demo.mjs` |
+| Output directory | `demo-dist` |
+| Environment variables | none |
+
+Do not point a hosted build at the real `npm run build` output, and do not expose the local services through a tunnel.
+
 ## Repository map and operations
 
 - `docs/00–12`: plan, machine readiness, models, deployment, RAG, libraries, assistants, tests, security, operation, troubleshooting, backups and a final-report template.
 - `docs/13–15`: UI blueprint, design-generation prompt and agent architecture.
 - `scripts/`: the Windows operating toolkit, including `stop-ai.ps1` and `backup.ps1`.
-- `frontend/src/`: React source; `frontend/dist/`: shipped real bundle.
-- `frontend/build/`: real and sample-data build scripts.
+- `frontend/src/`: React source (components include a sidebar and a mobile bottom tab bar); `frontend/dist/`: shipped real bundle.
+- `frontend/build/`: real and sample-data build scripts; `frontend/vercel.json`: preview hosting settings.
 - `frontend/server.py` and `frontend/agent.py`: local Python service and agent logic.
 - `benchmarks/prompts.json`: bilingual benchmark inputs.
 - `reports/`: locally generated operational reports, intentionally gitignored.
 
 Keep private libraries, logs, backup contents and personal system reports out of the public repository. The [setup guide](docs/GETTING_STARTED.md) records the remaining acceptance boundaries without changing existing scripts or assets.
 
-## بالعربية
+## Arabic summary
+
+<div dir="rtl" lang="ar">
 
 مساعد معرفة محلي لويندوز يجمع مستنداتك في مكتبات قابلة للبحث، مع واجهة React ونماذج تعمل عبر Ollama وOpen WebUI. الهدف إجابة يمكن الرجوع إلى مصدرها، واختبار الأداء والخصوصية على الجهاز فعلياً.
 
 النسخة الحقيقية تعمل محلياً؛ العرض المنشور ببيانات جاهزة ليس بديلاً عنها. تثبيت المكونات لا يثبت صحة الاسترجاع أو النسخ الاحتياطي. يفرض منفّذ أدوات Agent الآن منع البحث الخارجي ما لم يُفعّل بقيمة منطقية صريحة، وتغطي اختبارات محلية هذا الحدّ دون إجراء اتصالات فعلية. هذا لا يغني عن اختبار التثبيت والاسترجاع والاستعادة على ويندوز ومراجعة خصوصية النظام كاملاً. احتفظ بمفاتيح الوصول والملفات الخاصة خارج GitHub.
 
+</div>
+
 ## Licensing
 
-No repository-wide `LICENSE` file is present in the reviewed tree. This documentation does not add a license or alter existing code/assets.
+No repository-wide `LICENSE` file is present in the reviewed tree. No license is added here; all rights remain with the owner, Ahmed Zaian.
