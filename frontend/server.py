@@ -100,6 +100,12 @@ class Handler(http.server.SimpleHTTPRequestHandler):
         except Exception:
             return self._json(400, {"error": "invalid JSON body"})
 
+        if not isinstance(payload, dict):
+            return self._json(400, {"error": "JSON body must be an object"})
+        allow_web = payload.get("allowWeb", False)
+        if not isinstance(allow_web, bool):
+            return self._json(400, {"error": "allowWeb must be a boolean"})
+
         model = payload.get("model")
         if not model:
             return self._json(400, {"error": "model is required"})
@@ -113,7 +119,7 @@ class Handler(http.server.SimpleHTTPRequestHandler):
                 model=model,
                 history=payload.get("messages") or [],
                 kb_ids=payload.get("kbIds") or [],
-                allow_web=bool(payload.get("allowWeb")),
+                allow_web=allow_web,
                 owui_base=OWUI,
                 ollama_base=OLLAMA,
                 auth_headers=auth_headers,
