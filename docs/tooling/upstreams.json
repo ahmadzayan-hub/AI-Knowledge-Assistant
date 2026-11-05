@@ -1,0 +1,233 @@
+{
+  "verified_at": "2026-11-05T18:00:00Z",
+  "installed": false,
+  "notes": "Read-only inventory. Release pins are non-prerelease releases, not a security audit. Catalog pins are snapshots, not stable software releases. No dependencies executed or connections configured.",
+  "items": [
+    {
+      "name": "OpenHands",
+      "repository": "OpenHands/OpenHands",
+      "url": "https://github.com/OpenHands/OpenHands",
+      "kind": "application",
+      "license": "MIT",
+      "commit_sha": "934612b3b6cee05d3a4400b98b48a9c69215401d",
+      "pin_type": "latest_non_prerelease",
+      "release_tag": "v1.35.0",
+      "release_published_at": "2026-11-03T18:47:18Z",
+      "requirements": [
+        "Node.js >=24 and uv; optional Docker sandbox. Source build npm 11.12.1."
+      ],
+      "security": [
+        "Unsandboxed agent-server has full host filesystem access.",
+        "Keep loopback binding; restrict project mounts and harden remote deployment."
+      ],
+      "sources": {
+        "commit": "https://github.com/OpenHands/OpenHands/commit/934612b3b6cee05d3a4400b98b48a9c69215401d",
+        "readme": "https://github.com/OpenHands/OpenHands/blob/934612b3b6cee05d3a4400b98b48a9c69215401d/README.md",
+        "license": "https://github.com/OpenHands/OpenHands/blob/934612b3b6cee05d3a4400b98b48a9c69215401d/LICENSE",
+        "release": "https://github.com/OpenHands/OpenHands/releases/tag/v1.35.0"
+      },
+      "adoption_status": "reference_only"
+    },
+    {
+      "name": "Langflow",
+      "repository": "langflow-ai/langflow",
+      "url": "https://github.com/langflow-ai/langflow",
+      "kind": "application",
+      "license": "MIT",
+      "commit_sha": "d125bea3847e5992e287550d0fb1a0926f49be2a",
+      "pin_type": "latest_non_prerelease",
+      "release_tag": "v1.13.1",
+      "release_published_at": "2026-11-04T03:14:15Z",
+      "requirements": [
+        "Python 3.10-3.14; uv recommended; Docker or bundled desktop alternatives."
+      ],
+      "security": [
+        "Set administrator password; release builds disable automatic login, development branches do not.",
+        "Flows/components can execute code; isolate and restrict network access."
+      ],
+      "sources": {
+        "commit": "https://github.com/langflow-ai/langflow/commit/d125bea3847e5992e287550d0fb1a0926f49be2a",
+        "readme": "https://github.com/langflow-ai/langflow/blob/d125bea3847e5992e287550d0fb1a0926f49be2a/README.md",
+        "license": "https://github.com/langflow-ai/langflow/blob/d125bea3847e5992e287550d0fb1a0926f49be2a/LICENSE",
+        "release": "https://github.com/langflow-ai/langflow/releases/tag/v1.13.1"
+      },
+      "adoption_status": "reference_only"
+    },
+    {
+      "name": "Ollama",
+      "repository": "ollama/ollama",
+      "url": "https://github.com/ollama/ollama",
+      "kind": "model_runtime",
+      "license": "MIT",
+      "commit_sha": "9a3e8177767245acc62b735eba7d5d8a553606d0",
+      "pin_type": "latest_non_prerelease",
+      "release_tag": "v0.40.14",
+      "release_published_at": "2026-11-03T01:40:40Z",
+      "requirements": [
+        "macOS, Windows or Linux; model storage and RAM/VRAM depend on selected model."
+      ],
+      "security": [
+        "Default API binds 127.0.0.1:11434; retain loopback.",
+        "Model licenses are separate; cloud models transmit prompts; OLLAMA_NO_CLOUD=1 enables local-only mode."
+      ],
+      "sources": {
+        "commit": "https://github.com/ollama/ollama/commit/9a3e8177767245acc62b735eba7d5d8a553606d0",
+        "readme": "https://github.com/ollama/ollama/blob/9a3e8177767245acc62b735eba7d5d8a553606d0/README.md",
+        "license": "https://github.com/ollama/ollama/blob/9a3e8177767245acc62b735eba7d5d8a553606d0/LICENSE",
+        "release": "https://github.com/ollama/ollama/releases/tag/v0.40.14"
+      },
+      "adoption_status": "existing_integration_offline_tests"
+    },
+    {
+      "name": "Awesome LLM Apps",
+      "repository": "Shubhamsaboo/awesome-llm-apps",
+      "url": "https://github.com/Shubhamsaboo/awesome-llm-apps",
+      "kind": "example_catalog",
+      "license": "Apache-2.0",
+      "commit_sha": "6c16b23f1bacd0fdf240bb5141ef45e59e82c306",
+      "pin_type": "default_branch_snapshot",
+      "release_tag": null,
+      "release_published_at": null,
+      "requirements": [
+        "Select individual template; requirements and provider credentials vary."
+      ],
+      "security": [
+        "Not one installable application; inspect selected example and its dependencies before executing."
+      ],
+      "sources": {
+        "commit": "https://github.com/Shubhamsaboo/awesome-llm-apps/commit/6c16b23f1bacd0fdf240bb5141ef45e59e82c306",
+        "readme": "https://github.com/Shubhamsaboo/awesome-llm-apps/blob/6c16b23f1bacd0fdf240bb5141ef45e59e82c306/README.md",
+        "license": "https://github.com/Shubhamsaboo/awesome-llm-apps/blob/6c16b23f1bacd0fdf240bb5141ef45e59e82c306/LICENSE",
+        "release": null
+      },
+      "adoption_status": "reference_only"
+    },
+    {
+      "name": "Scrapling",
+      "repository": "D4Vinci/Scrapling",
+      "url": "https://github.com/D4Vinci/Scrapling",
+      "kind": "library_cli_mcp",
+      "license": "BSD-3-Clause",
+      "commit_sha": "3a4bb5b0a008233c85269a0a38a6d08edd4ce329",
+      "pin_type": "latest_non_prerelease",
+      "release_tag": "v0.5.1",
+      "release_published_at": "2026-11-04T20:29:16Z",
+      "requirements": [
+        "Python >=3.10; base package parser only; fetchers extra for HTTP/browser and ai extra for MCP.",
+        "Browser fetchers additionally require scrapling install browser/system dependencies."
+      ],
+      "security": [
+        "Respect site terms, robots and privacy; do not enable broad autonomous scraping or CAPTCHA solving by default.",
+        "MCP adds browsing capabilities and must be scoped."
+      ],
+      "sources": {
+        "commit": "https://github.com/D4Vinci/Scrapling/commit/3a4bb5b0a008233c85269a0a38a6d08edd4ce329",
+        "readme": "https://github.com/D4Vinci/Scrapling/blob/3a4bb5b0a008233c85269a0a38a6d08edd4ce329/README.md",
+        "license": "https://github.com/D4Vinci/Scrapling/blob/3a4bb5b0a008233c85269a0a38a6d08edd4ce329/LICENSE",
+        "release": "https://github.com/D4Vinci/Scrapling/releases/tag/v0.5.1"
+      },
+      "adoption_status": "reference_only"
+    },
+    {
+      "name": "free-for-dev",
+      "repository": "ripienaar/free-for-dev",
+      "url": "https://github.com/ripienaar/free-for-dev",
+      "kind": "resource_catalog",
+      "license": null,
+      "commit_sha": "215e323e5f0c074d2fe8245d48012dcc60f0ab7c",
+      "pin_type": "default_branch_snapshot",
+      "release_tag": null,
+      "release_published_at": null,
+      "requirements": [
+        "No runtime installation; browse directory."
+      ],
+      "security": [
+        "No repository LICENSE found and GitHub license metadata is null; link instead of redistributing as licensed content.",
+        "Listed services have independent terms, quotas, pricing and account permissions."
+      ],
+      "sources": {
+        "commit": "https://github.com/ripienaar/free-for-dev/commit/215e323e5f0c074d2fe8245d48012dcc60f0ab7c",
+        "readme": "https://github.com/ripienaar/free-for-dev/blob/215e323e5f0c074d2fe8245d48012dcc60f0ab7c/README.md",
+        "license": null,
+        "release": null
+      },
+      "adoption_status": "reference_only"
+    },
+    {
+      "name": "Open Design",
+      "repository": "nexu-io/open-design",
+      "url": "https://github.com/nexu-io/open-design",
+      "kind": "application",
+      "license": "Apache-2.0",
+      "commit_sha": "77b8eb889cf8a27a50d3325029d1b3bee5da0910",
+      "pin_type": "latest_non_prerelease",
+      "release_tag": "open-design-v0.27.0",
+      "release_published_at": "2026-11-04T04:02:06Z",
+      "requirements": [
+        "Source: Node 24.x and pnpm 10.33.2; desktop macOS/Windows; Linux from source.",
+        "Local agent CLI or BYOK model provider; Docker Compose alternative."
+      ],
+      "security": [
+        "Repository identity matches the supplied Open Design source link.",
+        "Agent processes and provider credentials require restricted access; MCP setup is a separate permission change.",
+        "README discloses always-on scrubbed safety/reliability telemetry; product analytics/session replay consent-gated."
+      ],
+      "sources": {
+        "commit": "https://github.com/nexu-io/open-design/commit/77b8eb889cf8a27a50d3325029d1b3bee5da0910",
+        "readme": "https://github.com/nexu-io/open-design/blob/77b8eb889cf8a27a50d3325029d1b3bee5da0910/README.md",
+        "license": "https://github.com/nexu-io/open-design/blob/77b8eb889cf8a27a50d3325029d1b3bee5da0910/LICENSE",
+        "release": "https://github.com/nexu-io/open-design/releases/tag/open-design-v0.27.0"
+      },
+      "adoption_status": "reference_only"
+    },
+    {
+      "name": "Awesome MCP Servers",
+      "repository": "punkpeye/awesome-mcp-servers",
+      "url": "https://github.com/punkpeye/awesome-mcp-servers",
+      "kind": "resource_catalog",
+      "license": "MIT",
+      "commit_sha": "29f2d490cc02468e7c9d87b0cf68d40d3041e7ef",
+      "pin_type": "default_branch_snapshot",
+      "release_tag": null,
+      "release_published_at": null,
+      "requirements": [
+        "No server installation; choose and vet individual MCP servers."
+      ],
+      "security": [
+        "Catalog license does not govern listed servers; each server can expose data or powerful tools."
+      ],
+      "sources": {
+        "commit": "https://github.com/punkpeye/awesome-mcp-servers/commit/29f2d490cc02468e7c9d87b0cf68d40d3041e7ef",
+        "readme": "https://github.com/punkpeye/awesome-mcp-servers/blob/29f2d490cc02468e7c9d87b0cf68d40d3041e7ef/README.md",
+        "license": "https://github.com/punkpeye/awesome-mcp-servers/blob/29f2d490cc02468e7c9d87b0cf68d40d3041e7ef/LICENSE",
+        "release": null
+      },
+      "adoption_status": "reference_only"
+    },
+    {
+      "name": "Public APIs",
+      "repository": "public-apis/public-apis",
+      "url": "https://github.com/public-apis/public-apis",
+      "kind": "resource_catalog",
+      "license": "MIT",
+      "commit_sha": "a7536b142e60e6a0be8d6b98ef72de77dacff5ed",
+      "pin_type": "default_branch_snapshot",
+      "release_tag": null,
+      "release_published_at": null,
+      "requirements": [
+        "No runtime installation; choose individual APIs."
+      ],
+      "security": [
+        "Each API has separate authentication, pricing, privacy and usage terms."
+      ],
+      "sources": {
+        "commit": "https://github.com/public-apis/public-apis/commit/a7536b142e60e6a0be8d6b98ef72de77dacff5ed",
+        "readme": "https://github.com/public-apis/public-apis/blob/a7536b142e60e6a0be8d6b98ef72de77dacff5ed/README.md",
+        "license": "https://github.com/public-apis/public-apis/blob/a7536b142e60e6a0be8d6b98ef72de77dacff5ed/LICENSE",
+        "release": null
+      },
+      "adoption_status": "reference_only"
+    }
+  ],
+  "schema_version": 1
+}
