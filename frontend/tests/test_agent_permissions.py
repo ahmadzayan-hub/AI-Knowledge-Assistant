@@ -49,7 +49,9 @@ class OfflineTestCase(unittest.TestCase):
 class AgentPermissionsTests(OfflineTestCase):
     def run_calls(self, calls, *, allow_web=False, kb_ids=None, post_responses=None, get_responses=None):
         post = self.enterContext(patch.object(
-            agent, "_post_json", side_effect=post_responses or [model_response(*calls), model_response()]
+            agent, "_post_json", side_effect=[{"capabilities": ["completion", "tools"]}] + (
+                post_responses or [model_response(*calls), model_response()]
+            )
         ))
         get = self.enterContext(patch.object(
             agent, "_get_json", side_effect=get_responses or [KB_CACHE]
@@ -71,7 +73,7 @@ class AgentPermissionsTests(OfflineTestCase):
         self.assertFalse(step["network"])
         self.assertIn("disabled for this run", step["result"])
         on_step.assert_any_call(step)
-        sent = post.call_args_list[1].args[1]
+        sent = post.call_args_list[2].args[1]
         self.assertIn({"role": "tool", "tool_name": "web_search", "content": step["result"]}, sent["messages"])
         self.assertNotIn("web_search", [t["function"]["name"] for t in sent["tools"]])
         self.assertEqual(result["answer"], "Finished.")
@@ -111,7 +113,7 @@ class AgentPermissionsTests(OfflineTestCase):
             result, post, _, _ = self.run_calls([], post_responses=[response] * agent.MAX_STEPS)
         web.assert_not_called()
         self.assertTrue(result["truncated"])
-        self.assertEqual(post.call_count, agent.MAX_STEPS)
+        self.assertEqual(post.call_count, agent.MAX_STEPS + 1)
         self.assertTrue(all(s["blocked"] for s in result["steps"][:-1]))
 
     def test_unknown_tool_denied_even_when_web_enabled(self):
@@ -137,20 +139,20 @@ class AgentPermissionsTests(OfflineTestCase):
                      {"documents": [["Synthetic passage"]], "metadatas": [[{"name": "shared.txt"}]]},
                      model_response()]
         result, post, _, _ = self.run_calls([], post_responses=responses)
-        self.assertEqual(post.call_args_list[1], call(
+        self.assertEqual(post.call_args_list[2], call(
             OWUI + "/api/v1/retrieval/query/collection",
             {"collection_names": ["selected"], "query": "sample", "k": 5},
             headers={"X-Test-Header": "synthetic"},
         ))
         self.assertIn("Synthetic passage", result["steps"][0]["result"])
-        system = post.call_args_list[0].args[1]["messages"][0]["content"]
+        system = post.call_args_list[1].args[1]["messages"][0]["content"]
         self.assertIn("shared.txt", system)
         self.assertNotIn("other-only.txt", system)
 
     def test_search_with_no_selection_does_not_query_collection(self):
         result, post, _, _ = self.run_calls([tool_call("search_knowledge_base", query="sample")], kb_ids=[])
-        self.assertEqual(post.call_count, 2)
-        self.assertTrue(all(c.args[0] == OLLAMA + "/api/chat" for c in post.call_args_list))
+        self.assertEqual(post.call_count, 3)
+        self.assertTrue(all(c.args[0] == OLLAMA + "/api/chat" for c in post.call_args_list[1:]))
         self.assertIn("No knowledge base is selected", result["steps"][0]["result"])
 
     def test_read_document_cannot_expand_selected_scope(self):

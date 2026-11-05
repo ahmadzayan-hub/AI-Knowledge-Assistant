@@ -4,6 +4,8 @@
 
 [Start safely](docs/GETTING_STARTED.md) · [Frontend guide](frontend/README.md) · [Implementation plan](docs/00-implementation-plan.md) · [Retrieval tests](docs/07-retrieval-testing.md)
 
+[Open-source tooling and project skills](docs/tooling/README.md) · [Pinned upstream references](docs/tooling/upstreams.json)
+
 ## The problem it addresses
 
 A collection of reports, study material and reference documents is only useful if you can find the relevant passage, understand its source and recognize when the answer is missing. The kit is designed around small local models, measured resource use and source-grounded retrieval rather than choosing the largest model that can load.
