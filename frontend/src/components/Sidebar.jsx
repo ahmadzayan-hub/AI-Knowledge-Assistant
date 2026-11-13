@@ -1,11 +1,11 @@
 import React from "react";
 
-const NAV = [
+export const NAV = [
   { id: "home", label: "Home", icon: "🏠" },
   { id: "chat", label: "Chat", icon: "💬" },
   { id: "agent", label: "Agent", icon: "🛠️" },
-  { id: "kb", label: "Knowledge Bases", icon: "📚" },
-  { id: "as", label: "Assistants", icon: "🤖" },
+  { id: "kb", label: "Knowledge Bases", short: "Library", icon: "📚" },
+  { id: "as", label: "Assistants", short: "Models", icon: "🤖" },
   { id: "set", label: "Settings", icon: "⚙️" },
 ];
 

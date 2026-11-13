@@ -27,6 +27,7 @@ frontend/
     styles.css                design tokens + component styles
     components/
       Sidebar.jsx             nav + live system-status card
+      MobileNav.jsx           bottom tab bar on screens under 760px
       Home.jsx                stat cards, top knowledge bases, quick actions
       Chat.jsx                streaming chat, model + knowledge-base selectors
       Agent.jsx               tool-using agent + step-by-step trace (docs/15)
