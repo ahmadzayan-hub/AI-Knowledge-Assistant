@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="400" viewBox="0 0 1280 400" role="img" aria-labelledby="t d">
+  <title id="t">Local AI Knowledge Assistant</title>
+  <desc id="d">Ask useful questions of your own documents, on your own Windows computer, with Ollama and Open WebUI.</desc>
+  <defs>
+    <radialGradient id="glow" cx="0.78" cy="0.45" r="0.5">
+      <stop offset="0" stop-color="#6d5ef2" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#6d5ef2" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1280" height="400" fill="#0b0d14"/>
+  <rect width="1280" height="400" fill="url(#glow)"/>
+  <g transform="translate(820 70)">
+    <rect width="380" height="260" rx="16" fill="#141726" stroke="#23263a"/>
+    <rect x="20" y="22" width="220" height="38" rx="12" fill="#1a1e30" stroke="#2b2f47"/>
+    <rect x="36" y="37" width="150" height="8" rx="4" fill="#8b90a5"/>
+    <rect x="140" y="78" width="220" height="38" rx="12" fill="#6d5ef2"/>
+    <rect x="156" y="93" width="170" height="8" rx="4" fill="#e6e8f0"/>
+    <rect x="20" y="134" width="300" height="62" rx="12" fill="#1a1e30" stroke="#2b2f47"/>
+    <rect x="36" y="150" width="240" height="8" rx="4" fill="#8b90a5"/>
+    <rect x="36" y="168" width="180" height="8" rx="4" fill="#8b90a5"/>
+    <rect x="20" y="212" width="96" height="26" rx="13" fill="#1d2032" stroke="#2b2f47"/>
+    <circle cx="36" cy="225" r="5" fill="#34d399"/>
+    <text x="48" y="230" fill="#e6e8f0" font-family="Arial, Helvetica, sans-serif" font-size="12">source</text>
+    <rect x="126" y="212" width="96" height="26" rx="13" fill="#1d2032" stroke="#2b2f47"/>
+    <circle cx="142" cy="225" r="5" fill="#34d399"/>
+    <text x="154" y="230" fill="#e6e8f0" font-family="Arial, Helvetica, sans-serif" font-size="12">source</text>
+  </g>
+  <rect x="80" y="92" width="48" height="48" rx="12" fill="#6d5ef2"/>
+  <text x="104" y="123" text-anchor="middle" fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="800">AI</text>
+  <text x="146" y="123" fill="#8f7cff" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700" letter-spacing="3">LOCAL · PRIVATE · SOURCE-GROUNDED</text>
+  <text x="80" y="210" fill="#e6e8f0" font-family="Arial, Helvetica, sans-serif" font-size="54" font-weight="800">Local AI Knowledge</text>
+  <text x="80" y="270" fill="#e6e8f0" font-family="Arial, Helvetica, sans-serif" font-size="54" font-weight="800">Assistant</text>
+  <text x="80" y="320" fill="#8b90a5" font-family="Arial, Helvetica, sans-serif" font-size="22">Ask your own documents, on your own Windows computer.</text>
+  <text x="80" y="352" fill="#8b90a5" font-family="Arial, Helvetica, sans-serif" font-size="22">Ollama + Open WebUI + a React workspace.</text>
+</svg>

@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
 import Sidebar from "./components/Sidebar.jsx";
+import MobileNav from "./components/MobileNav.jsx";
 import Home from "./components/Home.jsx";
 import Chat from "./components/Chat.jsx";
 import Agent from "./components/Agent.jsx";
@@ -60,7 +61,7 @@ export default function App() {
         <div className="demo-banner">
           <b>Demo — sample data only.</b> Not connected to a real AI stack. The
           real app runs 100% on your own machine —{" "}
-          <a href="https://github.com/ahmadzayan-hub/55" target="_blank" rel="noreferrer">
+          <a href="https://github.com/ahmadzayan-hub/AI-Knowledge-Assistant" target="_blank" rel="noreferrer">
             see the README
           </a>{" "}
           to set it up.
@@ -99,6 +100,7 @@ export default function App() {
         {view === "set" && <Settings status={status} onSaveKey={loadData} />}
       </main>
       </div>
+      <MobileNav view={view} onNavigate={setView} />
     </>
   );
 }
